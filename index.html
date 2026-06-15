@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Daily Kashout — Your Personalised Briefing on Indian Markets &amp; Policy</title>
+<!-- build: morning-edition-4 2026-06-15 -->
+<style>
+  :root{
+    --paper:#f8f4ea; --paper-deep:#f2ecdd; --ink:#1a1814; --ink-soft:#4a443a;
+    --rule:#1a1814; --rule-soft:#c9c0ab; --accent:#8b1a1a; --up:#1e6f3e; --down:#9b1c1c;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--paper);color:var(--ink);font-family:Georgia,'Times New Roman',serif;line-height:1.55;}
+  .sheet{max-width:1060px;margin:0 auto;padding:28px 26px 60px;}
+  .topline{display:flex;justify-content:space-between;font-family:Verdana,Arial,sans-serif;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);border-bottom:1px solid var(--rule);padding-bottom:6px;}
+  .masthead{text-align:center;padding:26px 0 14px;}
+  .masthead h1{font-size:58px;font-weight:900;letter-spacing:.04em;line-height:1;}
+  .masthead .tagline{margin-top:10px;font-family:Verdana,Arial,sans-serif;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--ink-soft);}
+  .mast-rule{border:0;border-top:3px double var(--rule);margin:14px 0 0;}
+  .motto{text-align:center;font-style:italic;font-size:13.5px;color:var(--ink-soft);padding:9px 20px 10px;border-bottom:1px solid var(--rule-soft);}
+  .motto .who{font-style:normal;font-family:Verdana,Arial,sans-serif;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-left:8px;}
+  .snapshot{border-bottom:1px solid var(--rule);padding:10px 0 0;}
+  .snapshot .label{font-family:Verdana,Arial,sans-serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px;}
+  .ticks{display:flex;flex-wrap:wrap;gap:0;}
+  .tick{flex:1 1 120px;padding:2px 14px 8px;border-left:1px solid var(--rule-soft);}
+  .tick:first-child{border-left:0;padding-left:0;}
+  .tick .name{font-family:Verdana,Arial,sans-serif;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);}
+  .tick .val{font-size:17px;font-weight:bold;}
+  .tick .chg{font-family:Verdana,Arial,sans-serif;font-size:10.5px;}
+  .chg.up{color:var(--up);} .chg.down{color:var(--down);}
+  nav.ribbon{display:flex;flex-wrap:wrap;border-bottom:2px solid var(--rule);position:sticky;top:0;background:var(--paper);z-index:50;}
+  .tab{font-family:Verdana,Arial,sans-serif;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:13px 18px;cursor:pointer;border:0;background:none;color:var(--ink);position:relative;}
+  .tab:hover{background:var(--paper-deep);}
+  .tab.active{font-weight:bold;color:var(--accent);}
+  .tab.active::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:3px;background:var(--accent);}
+  section.paper-section{display:none;padding-top:22px;}
+  section.paper-section.visible{display:block;animation:sectionIn .35s ease;}
+  @keyframes sectionIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  .section-head{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--rule);padding-bottom:8px;margin-bottom:20px;}
+  .section-head h2{font-size:25px;font-weight:900;letter-spacing:.02em;}
+  .section-head .kicker{font-family:Verdana,Arial,sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);}
+  .stories{display:grid;grid-template-columns:1fr 1fr;gap:26px;}
+  @media(max-width:760px){
+    .sheet{padding:16px 13px 40px;}
+    .stories{grid-template-columns:1fr;gap:20px;}
+    .masthead{padding:16px 0 10px;}
+    .masthead h1{font-size:33px;letter-spacing:.02em;}
+    .masthead .tagline{font-size:8.5px;letter-spacing:.18em;margin-top:7px;}
+    .topline{flex-wrap:wrap;gap:3px 12px;justify-content:center;font-size:9px;text-align:center;}
+    .motto{font-size:12.5px;padding:8px 6px 9px;line-height:1.45;}
+    .motto .who{display:block;margin:3px 0 0;}
+    nav.ribbon{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+    nav.ribbon::-webkit-scrollbar{display:none;}
+    .tab{padding:12px 13px;font-size:11px;white-space:nowrap;flex:0 0 auto;}
+    .ticks{display:grid;grid-template-columns:1fr 1fr;}
+    .tick{border-left:0 !important;border-top:1px solid var(--rule-soft);padding:6px 10px 7px;}
+    .tick:nth-child(-n+2){border-top:0;}
+    .tick:nth-child(2n){border-left:1px solid var(--rule-soft) !important;}
+    .tick .val{font-size:15.5px;}
+    .snapshot .label{font-size:8.5px;letter-spacing:.14em;}
+    .section-head{flex-wrap:wrap;gap:3px 12px;}
+    .section-head h2{font-size:21px;}
+    .story h3{font-size:18.5px;}
+    .story.lead h3{font-size:22px;}
+    .story .compact{font-size:14.5px;}
+    .zero{font-size:13.5px;padding:12px 12px;}
+    .stat-strip{flex-wrap:wrap;}
+    .stat{flex:1 1 45%;border-top:1px solid var(--rule-soft);}
+    .stat:nth-child(-n+2){border-top:0;}
+    .stat:nth-child(odd){border-left:0;}
+    figure.chart{padding:10px 10px 6px;}
+    footer{flex-direction:column;gap:6px;text-align:center;}
+  }
+  article.story{border-bottom:1px solid var(--rule-soft);padding-bottom:20px;}
+  article.story.lead{grid-column:1/-1;border-bottom:2px solid var(--rule);}
+  .story .src{font-family:Verdana,Arial,sans-serif;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+  .story h3{font-size:22px;line-height:1.22;font-weight:900;margin-bottom:9px;}
+  .story.lead h3{font-size:30px;}
+  .story .compact{font-size:15px;color:var(--ink);}
+  .zero-row{margin-top:12px;}
+  .zero-btn{font-family:Verdana,Arial,sans-serif;font-size:11px;font-weight:bold;letter-spacing:.08em;border:1.5px solid var(--ink);background:none;color:var(--ink);padding:5px 12px;cursor:pointer;border-radius:2px;transition:all .2s ease;}
+  .zero-btn:hover{background:var(--ink);color:var(--paper);}
+  .zero-btn.on{background:var(--accent);border-color:var(--accent);color:var(--paper);}
+  .zero-wrap{max-height:0;overflow:hidden;transition:max-height .5s ease;}
+  .zero-wrap.open{max-height:9000px;}
+  .zero{margin-top:12px;background:var(--paper-deep);border-left:3px solid var(--accent);padding:14px 16px;font-size:14.5px;color:var(--ink-soft);opacity:0;transform:translateY(-4px);transition:opacity .4s ease .12s,transform .4s ease .12s;}
+  .zero-wrap.open .zero{opacity:1;transform:none;}
+  .zero .zlabel{font-family:Verdana,Arial,sans-serif;font-size:9.5px;font-weight:bold;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:8px;}
+  .zero p+p{margin-top:10px;}
+  figure.chart{margin:14px 0 4px;border:1px solid var(--rule-soft);background:var(--paper-deep);padding:12px 14px 8px;}
+  figure.chart svg{display:block;width:100%;height:auto;}
+  figure.chart figcaption{font-family:Verdana,Arial,sans-serif;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-top:8px;border-top:1px solid var(--rule-soft);padding-top:6px;}
+  .bar-label{font-family:Verdana,Arial,sans-serif;font-size:10px;fill:var(--ink-soft);}
+  .bar-val{font-family:Verdana,Arial,sans-serif;font-size:10px;font-weight:bold;fill:var(--ink);}
+  .stat-strip{display:flex;gap:0;margin:14px 0 4px;border:1px solid var(--rule-soft);background:var(--paper-deep);}
+  .stat{flex:1;padding:10px 14px;border-left:1px solid var(--rule-soft);}
+  .stat:first-child{border-left:0;}
+  .stat .n{font-size:21px;font-weight:900;line-height:1.1;}
+  .stat .l{font-family:Verdana,Arial,sans-serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-top:3px;}
+  footer{margin-top:46px;border-top:3px double var(--rule);padding-top:12px;display:flex;justify-content:space-between;font-family:Verdana,Arial,sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="topline"><span>Edition No. 4</span><span id="dateline">Monday, June 15, 2026 &mdash; Morning Edition</span><span>Bengaluru &middot; <span id="istClock">--:--:--</span> IST</span></div>
+  <header class="masthead">
+    <h1>THE DAILY KASHOUT</h1>
+    <div class="tagline">Your Personalised Briefing on Indian Markets &amp; Policy</div>
+    <hr class="mast-rule">
+  </header>
+  <div class="motto"><span id="quoteText"></span><span class="who" id="quoteWho"></span></div>
+  <div class="snapshot">
+    <div class="label">Markets Snapshot &mdash; Equity: prev. close Fri 12 June 2026 &middot; Commodities: Mon 15 June pre-open (IST)</div>
+    <div class="ticks">
+      <div class="tick"><div class="name">Nifty 50</div><div class="val">23,622.90</div><div class="chg up">+1.99% Fri</div></div>
+      <div class="tick"><div class="name">Sensex</div><div class="val">75,527</div><div class="chg up">+2.3% Fri</div></div>
+      <div class="tick"><div class="name">USD/INR</div><div class="val">&#8377;94.54</div><div class="chg up">strengthening</div></div>
+      <div class="tick"><div class="name">Brent</div><div class="val">$83</div><div class="chg down">&minus;4% on deal</div></div>
+      <div class="tick"><div class="name">WTI</div><div class="val">$80</div><div class="chg down">&minus;4.5% on deal</div></div>
+      <div class="tick"><div class="name">MCX Gold 10g</div><div class="val">&#8377;1,49,080</div><div class="chg down">safe-haven ebbing</div></div>
+    </div>
+  </div>
+  <nav class="ribbon" id="ribbon">
+    <button class="tab active" data-section="macro">Macro &amp; Economy</button>
+    <button class="tab" data-section="markets">Markets</button>
+    <button class="tab" data-section="deals">Deals &amp; IPOs</button>
+    <button class="tab" data-section="startups">Startups &amp; Private Capital</button>
+    <button class="tab" data-section="commodities">Commodities</button>
+    <button class="tab" data-section="regulatory">Regulatory</button>
+  </nav>
+  <main id="sections">
+
+  <!-- ===== MACRO & ECONOMY ===== -->
+  <section class="paper-section visible" id="sec-macro">
+    <div class="section-head"><h2>Macro &amp; Economy</h2><span class="kicker">RBI &middot; Oil &middot; Rupee &middot; Growth &middot; Global</span></div>
+    <div class="stories">
+
+      <article class="story lead">
+        <div class="src">NBC News / PBS / CNBC / CBC &middot; Washington / Geneva</div>
+        <h3>US and Iran sign peace deal June 14: four months of war end, Strait of Hormuz to reopen within 30 days; oil crashes 4%</h3>
+        <p class="compact">The United States and Iran signed a 14-point memorandum of understanding on June 14, formally ending nearly four months of war that began with US and Israeli strikes on February 28. Key provisions: immediate termination of all military operations, US force withdrawal, Iran&rsquo;s reaffirmation of its commitment to abstain from nuclear weapons, and reopening of the Strait of Hormuz within 30 days. Brent crude fell 4% to approximately $83 per barrel and WTI fell more than 4.5% to approximately $80 &mdash; their lowest levels since early March &mdash; as the deal erased the &ldquo;Hormuz premium&rdquo; markets had priced for months. A formal signing ceremony is scheduled for June 20 in Switzerland; Iran&rsquo;s state media and the US State Department released slightly different versions of some terms, but the ceasefire and Hormuz clause are confirmed in both.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>Start with the war. On February 28, 2026, US and Israeli forces launched strikes on Iranian military infrastructure. Iran responded by deploying naval assets to block the Strait of Hormuz &mdash; a 33-kilometre-wide sea passage between Iran and Oman through which approximately 20% of the world&rsquo;s seaborne oil transits every day. That blockade cut millions of barrels of supply from the global market, sent oil from roughly $70 per barrel to the high $90s, disrupted global shipping insurance, and triggered a months-long macro shock that hit every oil-importing economy hard. India, the world&rsquo;s third-largest oil importer, was especially exposed.</p>
+            <p>The June 14 peace deal is an MoU &mdash; Memorandum of Understanding &mdash; a written agreement between two parties. It is not yet a formal treaty (which would require legislative ratification), but it is legally and diplomatically significant. The 14 points include: an immediate halt to all military operations on all fronts; US force withdrawal from the theatre; Iran&rsquo;s reaffirmation of its commitment to abstain from nuclear weapons; and the reopening of the Strait of Hormuz within 30 days. The Iran and US versions of the document differ on some sanctions-relief timelines &mdash; a diplomatically common discrepancy when each party announces a deal to a different domestic audience &mdash; but the core physical terms (ceasefire + Hormuz reopening) appear in both.</p>
+            <p>Why did oil fall 4% on the news? The market was pricing a &ldquo;war premium&rdquo; &mdash; the extra price per barrel reflecting the risk that the Hormuz blockade persists for months or years. That risk has now collapsed. The 30-day reopening timeline means approximately 2 million barrels per day of previously sanctioned Iranian oil could return to the global market over the next 6&ndash;12 months. Analysts at Goldman Sachs and JPMorgan flagged $70&ndash;75 per barrel as the potential equilibrium if Iranian supply fully normalises. Brent at $83 still carries a residual premium reflecting deal-execution risk: if the signing on June 20 proceeds cleanly and Hormuz actually reopens on schedule, the next leg down is likely.</p>
+            <p>For an ordinary person living and earning in India: each $10 per barrel decline in the annual crude import price is worth approximately $12 billion to India&rsquo;s import bill. Moving from $97 (the peak war price) to $83 is already a $14 saving &mdash; roughly $17 billion per year less going out. If crude settles back toward $75, the annual saving climbs toward $26 billion. That money stays inside India&rsquo;s financial system: the government spends less on fuel subsidies, the rupee faces less downward pressure, the current account deficit narrows, and the Reserve Bank gains more room to cut interest rates. For your EMI, your grocery bill, and the price of the next airline ticket you book, this peace deal is the single most positive macro development since the war began.</p>
+          </div></div>
+        </div>
+        <div class="stat-strip">
+          <div class="stat"><div class="n">$83</div><div class="l">Brent crude post-deal (&minus;4%)</div></div>
+          <div class="stat"><div class="n">$80</div><div class="l">WTI crude post-deal (&minus;4.5%+)</div></div>
+          <div class="stat"><div class="n">30 days</div><div class="l">Hormuz reopening timeline per MoU</div></div>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="src">Reuters / Business Standard / RBI &middot; Mumbai</div>
+        <h3>India&rsquo;s macro calculus flips: what the peace deal means for inflation, fiscal, and the case for an RBI September rate cut</h3>
+        <p class="compact">The RBI&rsquo;s June MPC held rates at 5.25% with a neutral stance, revising its FY27 CPI inflation forecast up to 5.1% and GDP growth forecast down to 6.6% on the assumption of sustained high oil prices. The US&ndash;Iran peace deal changes that assumption materially: if Brent settles toward $75&ndash;80, India&rsquo;s CPI could come in 0.3&ndash;0.5 percentage points below the RBI&rsquo;s forecast, the fiscal deficit narrows, the rupee finds support, and a September rate cut becomes markedly more likely. Markets are already pricing this shift.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>The RBI &mdash; Reserve Bank of India &mdash; sets interest rates through its Monetary Policy Committee (MPC), a six-member panel that votes every two months. At its June 3&ndash;5 meeting, the MPC kept the repo rate (the overnight lending rate to banks, which sets the floor for all interest rates in the economy) at 5.25%, with a &ldquo;neutral stance&rdquo; meaning it is neither signalling rate hikes nor guaranteeing cuts. Its forecasts &mdash; 5.1% average CPI (Consumer Price Index, the measure of retail inflation) for FY27 and 6.6% GDP (Gross Domestic Product) growth &mdash; were premised on the assumption that oil prices remain elevated because of the ongoing war.</p>
+            <p>Now the assumption has changed. Oil is the single largest driver of India&rsquo;s inflation through several channels: petrol and diesel prices flow into CPI directly; crude also raises the cost of every delivered good through transport fuel; and it widens the current account deficit, putting downward pressure on the rupee, which makes all imports more expensive. Historically, a $10/barrel sustained decline in crude reduces India&rsquo;s CPI by roughly 0.3&ndash;0.5 percentage points over 3&ndash;6 months. Moving from $87 (where the RBI calibrated its forecast) to $80 or lower translates into meaningful CPI relief. The fiscal dividend: lower crude reduces implicit fuel subsidies, freeing fiscal space. For an ordinary Indian: if the September MPC cuts rates by 25 basis points (a quarter of a percentage point), your home loan EMI falls. On a &#8377;50 lakh floating-rate loan over 20 years, a 25 bps cut reduces the EMI by roughly &#8377;800&ndash;1,000 per month. Whether the cut happens depends on whether the deal holds and oil stays down through August.</p>
+          </div></div>
+        </div>
+        <figure class="chart">
+          <svg viewBox="0 0 340 56" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Brent crude scenario path">
+            <text class="bar-label" x="0" y="14">War peak</text><rect x="82" y="5" width="215" height="11" fill="#9b1c1c"/><text class="bar-val" x="303" y="15">$97</text>
+            <text class="bar-label" x="0" y="30">Now (deal)</text><rect x="82" y="21" width="183" height="11" fill="#4a443a"/><text class="bar-val" x="271" y="31">$83</text>
+            <text class="bar-label" x="0" y="46">GS/JPM target</text><rect x="82" y="37" width="155" height="11" fill="#1e6f3e"/><text class="bar-val" x="243" y="47">~$70&ndash;75</text>
+          </svg>
+          <figcaption>Brent crude: war peak vs post-deal vs analyst equilibrium &middot; Source: Reuters / Goldman Sachs / JPMorgan</figcaption>
+        </figure>
+      </article>
+
+      <article class="story">
+        <div class="src">CNBC / Reuters &middot; Brussels / Tokyo</div>
+        <h3>World leaders welcome US&ndash;Iran deal; Europe signals sanctions relief, Japan eyes Iranian crude</h3>
+        <p class="compact">European foreign ministers formally welcomed the June 14 US&ndash;Iran agreement and signalled preparedness to lift sanctions on Tehran in phases, conditioned on verified Hormuz reopening and nuclear reaffirmation. Japan, historically one of the largest buyers of Iranian crude before the pre-war sanctions era, expressed readiness to resume imports once supply normalises. Iran&rsquo;s differing version of some deal terms &mdash; particularly on the pace of sanctions relief &mdash; has kept some uncertainty alive; the formal Switzerland signing on June 20 is the next definitive checkpoint for markets.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>Sanctions are economic restrictions imposed by one country or group of countries to pressure another. The US, EU, UK, and others had imposed increasingly tight sanctions on Iran over its nuclear programme, culminating in near-total isolation of Iran&rsquo;s oil exports. Iran responded partly through workarounds &mdash; selling to China and a few others at deep discounts. When the war broke out in 2026, the sanctions and the Hormuz blockade together locked approximately 2 million barrels per day off the international market. &ldquo;Sanctions relief&rdquo; means European governments would remove their own trade and financial restrictions on Iran, allowing Iranian oil to flow legally into European and Asian markets. That 2 million bpd returning would be the single largest supply addition since the 2020 OPEC+ production cuts were reversed.</p>
+            <p>The &ldquo;differing versions&rdquo; of the deal is a diplomatic constant: when the US announces a deal to a domestic audience emphasising strong compliance terms, and Iran announces the same deal emphasising sovereignty and concessions received, the text can look slightly different. What matters is whether both sides act on the physical terms. The June 20 Switzerland formal signing is where a single co-signed document should resolve the ambiguity. For an ordinary person in India: if European sanctions lift and Japanese importers return to the Iranian market, Iran competes with Middle Eastern benchmarks, structurally keeping crude cheaper. India has historically imported from Iran at a discount; if that trade is legally restored, Indian refiners (HPCL, BPCL, IOC) get a further price advantage beyond the market decline already seen.</p>
+          </div></div>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="src">NSDL data / Business Standard &middot; Mumbai</div>
+        <h3>FPIs pulled &#8377;62,800 crore from Indian equities in the first fortnight of June as Iran war uncertainty peaked</h3>
+        <p class="compact">Foreign portfolio investors net sold &#8377;62,800 crore worth of Indian equities in the first 15 days of June 2026, according to NSDL data &mdash; the fastest fortnight of outflows this year. The selling accelerated as the Iran conflict intensified in late May and early June; domestic institutional investors, powered by monthly SIP inflows of roughly &#8377;30,000&ndash;31,000 crore, absorbed the bulk of the flow, keeping Nifty above 23,000. The peace deal could trigger a partial reversal as risk appetite returns to emerging markets globally.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>FPI &mdash; Foreign Portfolio Investor &mdash; is any overseas entity registered with SEBI (the Securities and Exchange Board of India, the capital market regulator) to buy and sell Indian stocks and bonds. FPIs range from large sovereign wealth funds and pension funds to actively managed mutual funds and hedge funds. They hold approximately 15&ndash;17% of India&rsquo;s listed equity market. When FPIs sell, they receive rupees, convert to dollars, and repatriate &mdash; simultaneous downward pressure on stocks and on the rupee. NSDL &mdash; National Securities Depository Limited &mdash; maintains share ownership records and publishes FPI flow data daily. &#8377;62,800 crore is approximately $6.6 billion at current exchange rates &mdash; in two weeks. DII &mdash; Domestic Institutional Investor &mdash; primarily means mutual funds (pooling SIP contributions from crores of small investors), LIC (Life Insurance Corporation of India), and insurance companies. SIP &mdash; Systematic Investment Plan &mdash; is a monthly automated investment into a mutual fund, which has grown to &#8377;30,000+ crore per month in 2026 across India.</p>
+            <p>The peace deal could trigger a &ldquo;risk-on&rdquo; reversal: when global geopolitical uncertainty falls sharply, risk-appetite returns and emerging markets like India typically see capital inflows. FPIs who sold India to buy safe US Treasuries may rotate back, which would be positive for both Nifty and the rupee simultaneously. For an ordinary SIP investor: if you kept your SIP running during this period, your monthly investment was effectively buying what FIIs were selling &mdash; at prices made lower by their selling. If FIIs now buy back, that patient investment looks prescient. This is the structural advantage of rupee-cost averaging: you bought more units when prices were down.</p>
+          </div></div>
+        </div>
+        <div class="stat-strip">
+          <div class="stat"><div class="n">&#8377;62,800 cr</div><div class="l">FPI net equity outflow, first 15 days June</div></div>
+          <div class="stat"><div class="n">~&#8377;30,000 cr</div><div class="l">Monthly SIP inflow (DII absorption)</div></div>
+          <div class="stat"><div class="n">23,000+</div><div class="l">Nifty floor held through the selling</div></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===== MARKETS ===== -->
+  <section class="paper-section" id="sec-markets">
+    <div class="section-head"><h2>Markets</h2><span class="kicker">Equities &middot; Vedanta Demerger &middot; Flows &middot; Corporate Events</span></div>
+    <div class="stories">
+
+      <article class="story lead">
+        <div class="src">NSE / BSE / Business Today &middot; Mumbai</div>
+        <h3>Vedanta demerger day: VAML opens at &#8377;522, VEDPOWER at &#8377;41.80, VOGL at &#8377;38, VISL at &#8377;20 as four new companies begin trading</h3>
+        <p class="compact">The Vedanta group&rsquo;s long-anticipated demerger completed its first chapter on June 15 as four independently listed entities began trading on the NSE and BSE. Opening prices: VAML (Vedanta Aluminium Metal) at &#8377;522&ndash;527, VEDPOWER (Vedanta Power) at &#8377;41.80, VOGL (Vedanta Oil and Gas) at &#8377;38&ndash;39, and VISL (Vedanta Iron and Steel) at &#8377;20&ndash;22.25. Each shareholder who held Vedanta shares on the record date received one share of each entity; the four companies join the parent (which retains zinc and copper) for a total of five Vedanta-group listed entities from Monday. All four are in the Trade-to-Trade segment initially, meaning no intraday trading is permitted.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>A demerger is the corporate action of splitting one listed company into several separately listed companies. Vedanta Limited &mdash; the natural-resources conglomerate controlled by billionaire Anil Agarwal&rsquo;s Vedanta Resources group &mdash; historically bundled aluminium, zinc, copper, iron and steel, oil and gas, and power under a single listed entity. A demerger separates those businesses: investors who want aluminium get only aluminium exposure; investors who want oil and gas get only oil and gas. The market prices each business on its own merits rather than as a blended compromise. The four entities listing today: VAML (Vedanta Aluminium Metal Limited, housing India&rsquo;s largest aluminium smelter and its captive power capacity), VEDPOWER (Vedanta Power Limited, merchant power generation), VISL (Vedanta Iron and Steel Limited, iron ore and steel), and VOGL (Vedanta Oil and Gas Limited, upstream exploration and production assets including Rajasthan oil blocks). The parent Vedanta Limited retains zinc (via Hindustan Zinc, India&rsquo;s dominant zinc producer) and copper.</p>
+            <p>The demerger used a 1:1 entitlement: for each Vedanta share held on the record date, shareholders received one share of each of the four new entities, credited directly to demat accounts (the electronic accounts holding shares, managed by NSDL and CDSL) &mdash; no cash changed hands, no action was needed from shareholders. The opening prices matter because they are the market&rsquo;s first opinion of what each standalone business is worth. VAML at &#8377;522 is the most valuable of the four, reflecting aluminium&rsquo;s stronger fundamentals. VOGL at &#8377;38 is cheapest; oil and gas assets carry political and fiscal risk (revenue-sharing with the government, reserve depletion, global price volatility) and the sector is also under US-Iran peace-deal pressure. Trade-to-Trade (T2T) segment means no intraday (buy and sell same day) trading &mdash; every purchase must result in delivery, preventing speculative swings in newly listed, potentially illiquid stocks. For an ordinary person who held Vedanta shares: check your demat account today; you should now hold five positions (Vedanta parent + four new entities). Whether the total is higher or lower than the pre-demerger price reveals whether the market rewarded the restructuring.</p>
+          </div></div>
+        </div>
+        <figure class="chart">
+          <svg viewBox="0 0 340 66" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vedanta demerger opening prices">
+            <text class="bar-label" x="0" y="14">VAML</text><rect x="52" y="5" width="220" height="11" fill="#1e6f3e"/><text class="bar-val" x="278" y="15">&#8377;522</text>
+            <text class="bar-label" x="0" y="30">VEDPOWER</text><rect x="52" y="21" width="17" height="11" fill="#4a443a"/><text class="bar-val" x="75" y="31">&#8377;41.80</text>
+            <text class="bar-label" x="0" y="46">VOGL</text><rect x="52" y="37" width="15" height="11" fill="#c9c0ab"/><text class="bar-val" x="73" y="47">&#8377;38</text>
+            <text class="bar-label" x="0" y="62">VISL</text><rect x="52" y="53" width="8" height="11" fill="#c9c0ab"/><text class="bar-val" x="66" y="63">&#8377;20</text>
+          </svg>
+          <figcaption>Vedanta demerged entities indicative opening prices, NSE, 15 June 2026 &middot; Source: NSE/BSE</figcaption>
+        </figure>
+      </article>
+
+      <article class="story">
+        <div class="src">SGX / Reuters / Business Standard &middot; Singapore / Mumbai</div>
+        <h3>India markets set for gap-up open Monday: peace deal, cheaper oil, and a strengthening rupee converge at the open</h3>
+        <p class="compact">Indian equity markets are expected to open significantly higher on Monday June 15 following the US&ndash;Iran peace deal announced after Indian market hours on June 14. SGX Nifty futures signalled a gap-up open of 1.5&ndash;2%, with aviation, auto, banking, and consumer sectors expected to lead given their sensitivity to fuel costs and interest rates. Asian markets rallied broadly overnight; a weaker oil price, strengthening rupee, and sharply improved macro outlook are three tailwinds converging at Monday&rsquo;s open.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>SGX Nifty &mdash; a Nifty 50 futures contract traded on the Singapore Exchange &mdash; is a widely watched pre-market indicator because Singapore operates round-the-clock and Indian institutional investors and global funds use it to express views on India between Indian market hours (9:15 am to 3:30 pm IST). A &ldquo;gap-up open&rdquo; means the Nifty or Sensex starts trading above Friday&rsquo;s close with no trades at intermediate prices &mdash; the gap reflects major news arriving while markets were shut. A gap of 1.5&ndash;2% on a 23,600-level Nifty translates to approximately 350&ndash;470 points of outright gain at the open.</p>
+            <p>Why do specific sectors react to cheaper oil? Aviation (IndiGo, Air India): jet fuel is the biggest operating cost; cheaper crude equals cheaper Aviation Turbine Fuel (ATF) equals better margins. Auto (Maruti, Tata Motors, Mahindra): lower fuel prices increase car usage, plus input cost relief on plastics and lubricants; also, auto stocks benefit from rate-cut expectations improving affordability of vehicle loans. Banking (HDFC Bank, ICICI Bank): lower inflation expectations mean the RBI is more likely to cut rates; when rates fall, loan demand grows and EMI burden on borrowers eases, supporting credit quality. Consumer (FMCG, retail): lower fuel reduces logistics cost and gives consumers more disposable income. For an ordinary Indian with a stock portfolio or mutual fund: the Monday open will likely show paper gains. That does not mean you should sell &mdash; it means the market is adjusting its price to new information. If the peace deal holds, the gains are fundamental, not speculative.</p>
+          </div></div>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="src">Business Standard / BSE corporate actions &middot; Mumbai</div>
+        <h3>31 companies including HDFC Bank go ex-dividend or ex-bonus this week; June 15&ndash;19 is heavy on corporate actions</h3>
+        <p class="compact">Thirty-one listed companies have record dates for dividend or bonus share issues between June 15 and June 19, 2026, including HDFC Bank, Tata group companies, and Brigade Enterprises. Shareholders whose demat accounts hold these shares on the respective record dates receive the cash dividend or additional bonus shares; stock prices adjust downward by approximately the dividend amount on the ex-date. The ex-date is typically the trading day before the record date under India&rsquo;s T+1 settlement system.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>A dividend is a portion of a company&rsquo;s profit distributed to shareholders in cash. A bonus issue is free additional shares given proportionally to existing holders (a 1:1 bonus doubles your share count and halves the price per share, keeping total value the same). To receive either, you must own the shares on the &ldquo;record date&rdquo; &mdash; the date on which the company takes a snapshot of its shareholder register. Under T+1 settlement (India moved to T+1 in 2023, meaning trades settle one working day after execution), you must buy the shares by the day before the record date. The &ldquo;ex-date&rdquo; is the date from which buyers are no longer entitled to the upcoming dividend or bonus. On the ex-date, the stock price typically drops by approximately the dividend amount. HDFC Bank is India&rsquo;s most valuable private sector bank by market capitalisation; its dividend record dates draw attention because millions of retail and institutional investors hold its shares. For an ordinary investor: check your broker&rsquo;s &ldquo;corporate actions&rdquo; section or the BSE/NSE website for the precise ex-date and record date of stocks you own this week. Missing the ex-date by a day means missing the entitlement entirely.</p>
+          </div></div>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="src">Business Today / Business Standard &middot; Mumbai</div>
+        <h3>IT sector&rsquo;s double headwind: AI disruption fears join the US client-budget pressure that drove a 24% YTD fall</h3>
+        <p class="compact">India&rsquo;s IT sector, already down 24% year-to-date on weak US enterprise technology spending, faces a second structural headwind: TCS Chairman N. Chandrasekaran&rsquo;s comment that AI agents deployed could eventually match TCS&rsquo;s 600,000-strong employee count reignited fears that automation could structurally reduce demand for labour-intensive outsourcing. Nirmal Bang downgraded TCS, Infosys, HCL Technologies, Wipro, Tech Mahindra, and LTM to &lsquo;Sell&rsquo;. The 2&ndash;3% bounce on Friday&rsquo;s peace-deal optimism was macro relief, not fundamental reversal; July&ndash;August quarterly results and H2 guidance are the key inflection points.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>India&rsquo;s four largest IT companies &mdash; TCS (Tata Consultancy Services), Infosys, Wipro, and HCL Technologies &mdash; earn the bulk of their revenue from US and European companies that pay Indian engineers to build, maintain, and upgrade software. This is the outsourcing model that built India&rsquo;s technology-sector middle class over 30 years. Two distinct things are now pressuring them.</p>
+            <p>First, the cyclical problem: US companies facing high interest rates and war-driven macro uncertainty have cut discretionary IT spending &mdash; the &ldquo;nice to have, can wait&rdquo; projects like new data platforms and cloud migrations. This is a budget-cycle issue; it reverses when client CFOs open spending again, which typically happens in a rate-cutting environment. Second, the structural problem: AI agents &mdash; autonomous software programs powered by large language models &mdash; can now perform tasks that previously required junior IT professionals: writing boilerplate code, running test cases, generating reports, handling customer queries. TCS Chairman Chandrasekaran&rsquo;s comment about AI agents eventually matching headcount means the company itself is planning for a future where it does the same work with fewer people and more software. If that revenue-per-employee calculation shifts, the long-run valuation of IT services businesses changes fundamentally. &ldquo;H2 guidance&rdquo; means the revenue outlook for the second half of FY27 that companies will provide with July&ndash;August quarterly results &mdash; that is when the market will know whether American budgets are thawing. For IT professionals and their families: the cyclical slowdown affects near-term hiring and increments; the structural AI question is a decade-long story, not a quarter-to-quarter crisis.</p>
+          </div></div>
+        </div>
+        <div class="stat-strip">
+          <div class="stat"><div class="n">&minus;24%</div><div class="l">Nifty IT YTD through June 12</div></div>
+          <div class="stat"><div class="n">6</div><div class="l">Nirmal Bang &lsquo;Sell&rsquo; downgrades in IT</div></div>
+          <div class="stat"><div class="n">Jul&ndash;Aug</div><div class="l">Quarterly results: the next inflection</div></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===== DEALS & IPOs ===== -->
+  <section class="paper-section" id="sec-deals">
+    <div class="section-head"><h2>Deals &amp; IPOs</h2><span class="kicker">DRHP &middot; M&amp;A &middot; OFS &middot; Public Offerings</span></div>
+    <div class="stories">
+
+      <article class="story lead">
+        <div class="src">Business Standard / Analytics Insight / Upstox &middot; Mumbai / New Delhi</div>
+        <h3>NSE files its DRHP with SEBI today: a decade-long wait ends as India&rsquo;s largest exchange begins the IPO process</h3>
+        <p class="compact">The National Stock Exchange of India is filing its Draft Red Herring Prospectus with SEBI on June 15&ndash;16, 2026, formally beginning the regulatory review process for what is expected to be the largest IPO in Indian market history. The offering is a pure Offer for Sale (OFS) of existing shares by institutional shareholders including LIC and SBI, targeting approximately &#8377;22,000&ndash;23,000 crore and implying a company valuation of &#8377;4&ndash;6 lakh crore. SEBI issued its No Objection Certificate in January 2026, clearing the path after a decade of regulatory delay rooted in governance and co-location issues.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>NSE &mdash; National Stock Exchange of India &mdash; is the exchange where the vast majority of India&rsquo;s stock and derivative trades happen. When you buy or sell a share on Zerodha, Groww, or HDFC Securities, the order almost certainly routes through NSE&rsquo;s electronic matching system. NSE processes hundreds of millions of orders daily and is one of the world&rsquo;s largest exchanges by derivatives volume. Paradoxically, it has never itself been listed on any exchange. That paradox ends with today&rsquo;s filing.</p>
+            <p>A DRHP &mdash; Draft Red Herring Prospectus &mdash; is the detailed document a company files with SEBI when it wants to go public. &ldquo;Prospectus&rdquo; is an offering document: a full disclosure of business operations, financial statements, risk factors, and the proposed use of IPO proceeds. &ldquo;Red Herring&rdquo; (a historical term) indicates the price range and final issue size are not yet fixed. &ldquo;Draft&rdquo; means SEBI will scrutinise it, ask questions, and require clarifications before it becomes final. SEBI typically takes 30&ndash;75 days to review a DRHP. An OFS &mdash; Offer for Sale &mdash; means existing shareholders sell their own shares to the public; the company itself raises no new money. LIC (Life Insurance Corporation of India) and SBI (State Bank of India) &mdash; both public-sector institutions that hold equity in NSE &mdash; are selling portions of their stakes.</p>
+            <p>Why a decade of delay? In 2015&ndash;2016, NSE first attempted an IPO. Then the &ldquo;co-location scandal&rdquo; broke: some brokers alleged that NSE&rsquo;s servers had been set up in a way that gave certain high-frequency trading firms nanosecond-faster access to market data &mdash; a potential violation of market equality. SEBI investigations dragged on for years. NSE also faced senior management governance lapses. The January 2026 No Objection Certificate from SEBI marked the formal end of that overhang. At &#8377;4&ndash;6 lakh crore implied valuation, NSE would rank among the most valuable financial infrastructure companies globally. For an ordinary retail investor in India: when this IPO opens for subscription (likely late 2026 if SEBI review proceeds quickly), it will be one of the most sought-after in a decade. The exchange you use daily will become something you can own a share of.</p>
+          </div></div>
+        </div>
+        <div class="stat-strip">
+          <div class="stat"><div class="n">&#8377;22&ndash;23K cr</div><div class="l">OFS size (LIC, SBI selling)</div></div>
+          <div class="stat"><div class="n">&#8377;4&ndash;6L cr</div><div class="l">Implied NSE valuation range</div></div>
+          <div class="stat"><div class="n">Jan 2026</div><div class="l">SEBI NOC received (after decade-long wait)</div></div>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="src">Groww / Inc42 / SEBI &middot; Mumbai / Bengaluru</div>
+        <h3>Zepto&rsquo;s updated DRHP under SEBI review: &#8377;22,623 crore FY26 revenue and 1,139 dark stores underpin the case</h3>
+        <p class="compact">SEBI is reviewing Zepto&rsquo;s updated DRHP, which disclosed FY26 revenue of &#8377;22,623 crore (more than doubling FY25&rsquo;s &#8377;10,500 crore), a &#8377;8,010 crore fresh issue alongside an OFS, and 1,139 dark stores across India. Market sources indicate SEBI observations could come by August 2026, with a potential listing in Q3&ndash;Q4 FY2027. The DRHP also disclosed narrowing unit-level losses as the quick commerce business scales.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>Zepto is the quick-commerce startup promising 10-minute grocery and daily-essentials delivery, competing with Blinkit (owned by Zomato) and Swiggy Instamart. Its model uses &ldquo;dark stores&rdquo; &mdash; small, dense warehouses in urban neighbourhoods invisible to the street (no retail counter), staffed entirely by pickers and delivery riders, serving a 2&ndash;3 km catchment. Unlike a supermarket, a dark store is optimised entirely for speed of fulfillment. Zepto&rsquo;s revenue doubling from &#8377;10,500 crore to &#8377;22,623 crore in one year is the headline number: quick commerce is the fastest-growing channel in Indian retail. The &#8377;8,010 crore fresh issue means Zepto itself raises new money (new shares issued, company gets cash for expansion and infrastructure). A concurrent OFS means existing investors also cash out partially. &ldquo;Unit-level losses narrowing&rdquo; is the key profitability signal: if each individual dark store is close to covering its own operating costs, the path to overall profitability is a matter of adding enough stores. For an ordinary person who shops on Zepto: the IPO, when it opens, will let you invest in the delivery app you use daily.</p>
+          </div></div>
+        </div>
+        <div class="stat-strip">
+          <div class="stat"><div class="n">&#8377;22,623 cr</div><div class="l">FY26 revenue (2&times; YoY growth)</div></div>
+          <div class="stat"><div class="n">&#8377;8,010 cr</div><div class="l">Fresh issue size</div></div>
+          <div class="stat"><div class="n">1,139</div><div class="l">Dark stores across India</div></div>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="src">KPMG / Business Standard &middot; Mumbai</div>
+        <h3>India M&amp;A in June: Kedaara Capital acquires Axis Finance stake; VINCI buys nine Indian toll roads for &#8377;15,000 crore</h3>
+        <p class="compact">India&rsquo;s M&amp;A market continued its active pace in June with two notable transactions: Kedaara Capital, a leading domestic private equity firm, acquired a minority stake in Axis Finance Limited (the NBFC subsidiary of Axis Bank); and VINCI Highways of France closed its acquisition of nine toll road assets from Macquarie Asset Management at an enterprise value of approximately &#8377;15,000 crore (~$1.8 billion). The infrastructure deal is one of the largest foreign acquisitions of Indian toll assets and reflects continued international appetite for India&rsquo;s long-duration infrastructure cash flows.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>Kedaara Capital is a Bengaluru-based private equity firm investing in mid-market Indian companies across financial services, healthcare, and consumer sectors. Axis Finance is the NBFC &mdash; Non-Banking Financial Company &mdash; subsidiary of Axis Bank, which lends to individuals and businesses in segments like loans against property and SME (small and medium enterprise) finance. A minority stake acquisition means Kedaara bought a portion of Axis Finance but Axis Bank retains majority control; for Axis Bank, this brings in strategic capital for the subsidiary&rsquo;s growth. VINCI Highways is the French motorway subsidiary of VINCI &mdash; one of Europe&rsquo;s largest infrastructure conglomerates operating toll roads in 15+ countries. Macquarie Asset Management is an Australian fund specialising in infrastructure ownership globally; it had accumulated nine Indian toll road concessions which VINCI is now buying. Toll roads are attractive infrastructure investments: revenue is contracted (tariff set by government, traffic provides the volume), long-duration (concession periods often 25&ndash;30 years), and partially inflation-linked. An enterprise value of &#8377;15,000 crore reflects this pricing quality. For an ordinary person in India: the operator of some highway toll plazas you drive through may change from an Australian-managed fund to a French company &mdash; toll rates change minimally, but the capital behind the infrastructure has a new owner.</p>
+          </div></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===== STARTUPS & PRIVATE CAPITAL ===== -->
+  <section class="paper-section" id="sec-startups">
+    <div class="section-head"><h2>Startups &amp; Private Capital</h2><span class="kicker">VC &middot; PE &middot; Funding &middot; Green Energy</span></div>
+    <div class="stories">
+
+      <article class="story lead">
+        <div class="src">YourStory / iamRenew / The Wire &middot; Bengaluru</div>
+        <h3>GPS Renewables raises &#8377;635 crore Series C &mdash; India&rsquo;s largest compressed biogas startup bets on domestic fuel to replace imported gas</h3>
+        <p class="compact">Bengaluru-based GPS Renewables (GPSR), which designs, builds, and operates compressed biogas plants using agricultural waste and municipal solid waste, raised &#8377;635 crore in a Series C round comprising &#8377;125 crore equity led by PixelSky Capital, &#8377;200 crore equity into its asset platform Arya from a Korean conglomerate, and &#8377;310 crore from Japanese trading house Sojitz Corporation. GPS has over 30 operational or near-complete projects and visibility on more than 200 projects co-developed with Indian oil marketing companies under a government-mandated CBG blending programme.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>Biogas is the gas produced when organic material &mdash; crop stubble, animal manure, kitchen waste, sewage sludge, municipal solid waste &mdash; breaks down without oxygen in an enclosed chamber. The dominant component is methane (CH4), the same molecule as natural gas. CBG &mdash; Compressed Biogas &mdash; is that methane, purified and compressed to the same pressures as CNG &mdash; Compressed Natural Gas &mdash; the fuel running crores of auto-rickshaws, buses, CNG cars, and household cooking connections in Indian cities. The crucial point: CNG vehicles can run on CBG without any modification. CBG and CNG are physically interchangeable at the pump and the engine. GPS Renewables does not make CNG vehicles; it builds the infrastructure to produce CBG and inject it into the city gas distribution network, replacing imported natural gas with domestically made biogas.</p>
+            <p>India imports significant volumes of LNG &mdash; Liquefied Natural Gas &mdash; from Qatar, the US, and Australia at international prices. CBG is entirely domestic, made from waste that is otherwise burned or dumped. India&rsquo;s government runs a CBG programme called SATAT (Sustainable Alternative Towards Affordable Transportation), which mandates oil marketing companies &mdash; IOC, BPCL, HPCL &mdash; to procure CBG from producers like GPS at a set floor price. That mandate gives GPS &ldquo;visibility on 200+ projects&rdquo;: committed offtake agreements from OMCs if GPS builds the plants. GPSR Arya is GPS Renewables&rsquo; asset-holding platform &mdash; a separate entity owning the physical plants, financed separately. Lenders prefer to lend against predictable cash flows from specific assets rather than the whole company. Sojitz Corporation is a Japanese diversified trading company with energy and food interests; its investment is strategic, given Japan&rsquo;s heavy LNG import dependence. For an ordinary person in India: if you pay for CNG at a pump, GPS Renewables&rsquo; success means a growing portion of that gas comes from Indian farms and Indian garbage rather than Qatari gas fields. The air quality benefit: CBG projects in agricultural areas reduce crop stubble-burning that blankets North Indian cities in smog each October&ndash;November.</p>
+          </div></div>
+        </div>
+        <div class="stat-strip">
+          <div class="stat"><div class="n">&#8377;635 cr</div><div class="l">Total Series C raised</div></div>
+          <div class="stat"><div class="n">30+</div><div class="l">CBG plants operational / near-complete</div></div>
+          <div class="stat"><div class="n">200+</div><div class="l">Pipeline projects with OMCs</div></div>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="src">ScoopEarth / Sahyadri Startups &middot; Bengaluru / Mumbai</div>
+        <h3>India startup funding week of June 8&ndash;13: 28 deals, $255.9 million &mdash; the third consecutive week of rising volume</h3>
+        <p class="compact">Indian startups raised approximately $255.9 million across 28 disclosed deals in the week of June 8&ndash;13, 2026 &mdash; the highest weekly total since before the Iran war disrupted sentiment in late February. GPS Renewables, Ethereal Machines, Mygate, Exponent Energy, and 4baseCare were the week&rsquo;s largest disclosed rounds. The third consecutive week of rising funding volume signals that VC confidence is returning, helped by improving macro sentiment and the early signs of the US&ndash;Iran peace deal framework that emerged during the week.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>Weekly funding volume is a leading indicator of the health of India&rsquo;s startup ecosystem: it reflects how many deals VC (Venture Capital) and PE (Private Equity) funds are closing, which in turn reflects fund deployment confidence. When macros are uncertain &mdash; as they were from February to May 2026 during the Iran war &mdash; VC funds slow their pace: global LPs (Limited Partners, the pension funds and endowments that give money to VC funds) get nervous, dollar-denominated returns look worse when the rupee is weak, and exit routes through IPOs become harder. &ldquo;Rising for a third consecutive week&rdquo; matters because VC cycles tend to have momentum: once funds start deploying again, they tend to continue. The breadth of sectors in a single week (CBG energy, precision manufacturing, housing-tech, EV, cancer genomics) suggests this is broad-based conviction returning, not a single-sector bet. For an ordinary person in India, startup funding is an upstream indicator: the capital going into Ethereal Machines and GPS Renewables also funds engineers, factory workers, and supply-chain partners. VC-funded job creation typically runs 6&ndash;12 months behind the funding cycle.</p>
+          </div></div>
+        </div>
+        <div class="stat-strip">
+          <div class="stat"><div class="n">$255.9 mn</div><div class="l">Total funding, week June 8&ndash;13</div></div>
+          <div class="stat"><div class="n">28</div><div class="l">Disclosed deals this week</div></div>
+          <div class="stat"><div class="n">3rd wk</div><div class="l">Consecutive rising volume post-war lull</div></div>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="src">StartupTalky / Entrackr &middot; Mumbai / Bengaluru</div>
+        <h3>Fidelity sells Meesho stake in secondary transaction &mdash; a valuation data point ahead of the social commerce startup&rsquo;s IPO</h3>
+        <p class="compact">US fund manager Fidelity Investments sold a portion of its stake in Meesho &mdash; the social commerce startup enabling small sellers to reach buyers through WhatsApp and Instagram &mdash; in a secondary transaction, according to market sources. Terms were not publicly disclosed, but the transaction implies a market valuation of Meesho shares in the secondary market, providing a pricing reference ahead of the company&rsquo;s indicated IPO in 2026&ndash;2027.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zlabel">Zero-Context Explainer</span>
+            <p>A secondary transaction is the sale of existing private company shares from one investor to another, without new money entering the company. The company continues operating normally; no new shares are issued and no fundraise is announced. Meesho is a Bengaluru e-commerce platform where sellers &mdash; often women in smaller cities selling clothing, accessories, home goods &mdash; use Meesho&rsquo;s tools to share product listings on WhatsApp and social media. Buyers place orders; Meesho handles logistics and payments. This &ldquo;social commerce&rdquo; model reached over 130 million transacting users and is one of the most-used e-commerce apps in India outside metro cities. Fidelity Investments is a Boston-based global asset manager with over $10 trillion under management; its private market arm backed Meesho in earlier funding rounds. A secondary sale is often a sign that an early investor wants partial liquidity while the company is still private &mdash; common before an IPO, as large funds manage position sizes. The valuation implied by the secondary transaction becomes a reference when Meesho eventually files its DRHP: investment bankers will compare the public offering price to what secondary markets last priced the shares at. For an ordinary person in India who shops on Meesho or whose business sells on it: the app is unaffected. The IPO, when it comes, will be an opportunity to invest in a company reshaping how India&rsquo;s tier-2 and tier-3 cities shop.</p>
+          </div></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===== COMMODITIES ===== -->
+  <section class="paper-section" id="sec-commodities">
+    <div class="section-head"><h2>Commodities</h2><span class="kicker">Oil &middot; Gold &middot; Gas &middot; MCX</span></div>
+    <div class="stories">
+
+      <article class="story lead">
+        <div class="src">Reuters / OilPrice.com / EIA &middot; London / New York</div>
+        <h3>Peace deal sends Brent to $83, WTI to $80 &mdash; oil&rsquo;s war premium collapses; $70&ndash;75 in sight if Hormuz opens on schedule</h3>
+        <p class="compact">Brent crude fell approximately 4% to ~$83 per barrel and WTI fell more than 4.5% to ~$80 following the June 14 US&ndash;Iran peace deal, their lowest levels since early March 2026, as markets erased the &ldquo;Hormuz premium&rdquo; priced in since the blockade began in February. Analysts at Goldman Sachs and JPMorgan flagged $70&ndash;75 Brent as the potential equilibrium once sanctioned Iranian supply (approximately 2 million barrels per day) normalises over 6&ndash;12 months. The EIA&rsquo;s May 2026 forecast of $88 Brent will almost certainly be revised sharply lower.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>Oil prices have two components: the &ldquo;fundamental price&rdquo; based on supply and demand, and a &ldquo;risk premium&rdquo; based on geopolitical uncertainty. Before the US-Iran war, analysts estimated Brent&rsquo;s fundamental value at approximately $70&ndash;75 per barrel, based on OPEC+ (the oil producer cartel of Saudi Arabia, the UAE, Russia, and others) supply levels and global demand growth. The war added several layers of premium: the blockade of the Strait of Hormuz removed approximately 2 million barrels per day of supply; tanker insurance costs spiked; and the risk of further escalation raised the speculative bid for oil. At peak fear in March 2026, Brent touched the high $90s.</p>
+            <p>Brent Crude is the international benchmark, a blend of North Sea crude used to price approximately two-thirds of the world&rsquo;s traded oil. WTI (West Texas Intermediate) is the US domestic benchmark, typically trading a few dollars below Brent. EIA &mdash; the US Energy Information Administration &mdash; is the US government&rsquo;s official energy statistics agency; its price forecasts are widely followed. The peace deal removes the war risk layers. Brent at $83 still carries a residual premium reflecting deal-execution risk (does June 20 signing happen cleanly? Does Hormuz physically reopen? Does OPEC+ cut output to defend higher prices?). Those three uncertainties explain why oil did not immediately return to $72. For India, which imports approximately 87% of its crude oil needs: at 1.7&ndash;1.8 billion barrels of annual consumption, the move from $97 (war peak) to $83 is worth $23&ndash;25 billion in reduced annual import costs. If Brent settles toward $75, the saving grows to $35+ billion per year &mdash; a structural support for the rupee and a direct pathway to lower fuel prices at the pump.</p>
+          </div></div>
+        </div>
+        <figure class="chart">
+          <svg viewBox="0 0 340 56" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Brent crude scenario path: war peak $97, post-deal $83, analyst equilibrium $70-75">
+            <text class="bar-label" x="0" y="14">War peak</text><rect x="82" y="5" width="215" height="11" fill="#9b1c1c"/><text class="bar-val" x="303" y="15">$97</text>
+            <text class="bar-label" x="0" y="30">Now (deal)</text><rect x="82" y="21" width="183" height="11" fill="#4a443a"/><text class="bar-val" x="271" y="31">$83</text>
+            <text class="bar-label" x="0" y="46">GS/JPM target</text><rect x="82" y="37" width="155" height="11" fill="#1e6f3e"/><text class="bar-val" x="243" y="47">~$70&ndash;75</text>
+          </svg>
+          <figcaption>Brent crude: war peak vs post-deal vs analyst equilibrium target &middot; Source: Reuters / Goldman Sachs / JPMorgan</figcaption>
+        </figure>
+      </article>
+
+      <article class="story">
+        <div class="src">Goodreturns / GoldPriceIndia / MCX &middot; Mumbai</div>
+        <h3>MCX gold retreats to &#8377;1,49,080 per 10g as peace deal erodes safe-haven premium and rupee strengthens</h3>
+        <p class="compact">MCX gold futures were trading at approximately &#8377;1,49,080 per 10 grams on June 14&ndash;15, down from &#8377;1,50,343 in the prior session, as the US&ndash;Iran peace deal reduced flight-to-safety demand that had kept gold elevated since late February. The rupee&rsquo;s strengthening to &#8377;94.54 per dollar also applied pressure to MCX prices (a stronger rupee makes gold imports cheaper in rupee terms, reducing the domestic price). Gold has retreated from its March 2026 peak near &#8377;1,60,000 per 10 grams as both the geopolitical premium and US rate expectations shifted.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>Gold has an unusual dual role in financial markets: it is both a commodity (used for jewellery, electronics, and some industrial applications) and a financial safe-haven asset (investors buy it when they are scared of inflation, war, currency collapse, or financial crises). MCX &mdash; Multi Commodity Exchange of India &mdash; is India&rsquo;s largest commodity futures exchange. MCX gold is quoted in rupees per 10 grams; international spot gold is quoted in US dollars per troy ounce (approximately 31 grams). The MCX price is derived from the international price, converted to rupees using the USD/INR rate. This means two things affect the MCX gold price: the international gold price in dollars, and the rupee-dollar exchange rate. When the rupee strengthens (more dollars per rupee, or equivalently fewer rupees per dollar), gold in rupee terms becomes cheaper even if the international dollar price is unchanged.</p>
+            <p>Why is gold falling? Two forces converging. First, safe-haven demand is easing: the Iran war that sent investors into gold as a fear asset is ending. As peace holds, investors gradually rotate from gold back into equities and other risk assets. Second, the US Federal Reserve has held interest rates high. Gold pays no interest, so when safe US Treasury bonds pay 4.5%, holding gold has an &ldquo;opportunity cost&rdquo; (you forgo 4.5% per year to hold an asset that pays nothing). High-for-longer US rates are a structural headwind for gold even as geopolitical risk recedes. Indian households hold approximately 25,000 tonnes of gold cumulatively &mdash; the largest private gold stock in the world. At &#8377;1,49,080 per 10g, that stock is still at historically elevated levels; the decline from the &#8377;1,60,000 peak is a correction, not a crash. For a family planning a wedding: prices remain high by historical standards, so jewellery budgets should still factor in elevated MCX rates even as the geopolitical premium slowly deflates.</p>
+          </div></div>
+        </div>
+        <div class="stat-strip">
+          <div class="stat"><div class="n">&#8377;1,49,080</div><div class="l">MCX gold per 10g (Jun 14&ndash;15)</div></div>
+          <div class="stat"><div class="n">&#8377;1,60,000</div><div class="l">Peak in March 2026</div></div>
+          <div class="stat"><div class="n">&#8377;94.54</div><div class="l">USD/INR (stronger rupee pressures MCX)</div></div>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="src">MCX / Reuters &middot; Mumbai / London</div>
+        <h3>MCX complex post-deal: silver&rsquo;s industrial bid holds; natural gas normalisation takes longer than crude</h3>
+        <p class="compact">In the MCX commodity complex, silver fell modestly on peace-deal safe-haven deflation but found support from its structural industrial demand base in solar panels, EVs, and electronics. Natural gas futures remained elevated because LNG &mdash; Liquefied Natural Gas &mdash; supply disrupted by the Hormuz blockade will normalise more slowly than crude oil: LNG requires specialised terminals and carriers that were rerouted during the war and need additional weeks to reconstitute supply chains even once the Strait reopens.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>Silver differs from gold because it has genuine large-scale industrial uses: every solar photovoltaic (PV) panel uses silver paste in its electrical contacts; every smartphone circuit board uses small quantities; EV batteries use silver in thermal management components. This gives silver a dual personality &mdash; it falls with gold on peace-deal safe-haven deflation, but it also has a structural industrial bid that gold does not share. India&rsquo;s ambitious solar installation targets (500 GW by 2030) mean domestic solar demand for silver will only grow, providing a floor under the price even as the geopolitical premium recedes. Natural gas is a different case. Crude oil tankers can reroute to avoid the Hormuz Strait via the Cape of Good Hope; LNG carriers operate differently. LNG (which must be supercooled to minus 162 degrees Celsius to be transported as a liquid and then regasified at the destination) requires specialised LNG carriers and purpose-built receiving terminals. Those were partly rerouted during the Hormuz closure; rerouting them back takes weeks of logistical coordination &mdash; scheduling, berth availability, and regasification terminal capacity. India imports approximately 45% of its gas demand as LNG. A delay in normalising LNG flows means gas prices may stay elevated even as crude falls, which matters for city gas distribution companies (Indraprastha Gas, Mahanagar Gas) and CNG vehicle users in the near term.</p>
+          </div></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===== REGULATORY ===== -->
+  <section class="paper-section" id="sec-regulatory">
+    <div class="section-head"><h2>Regulatory</h2><span class="kicker">SEBI &middot; RBI &middot; Policy &middot; Frameworks</span></div>
+    <div class="stories">
+
+      <article class="story lead">
+        <div class="src">SEBI circular / AIF Services India &middot; New Delhi</div>
+        <h3>SEBI&rsquo;s June 2026 AIF Master Circular: the most comprehensive overhaul of India&rsquo;s alternative investment framework since the sector&rsquo;s birth in 2012</h3>
+        <p class="compact">SEBI issued a comprehensive Master Circular for Alternative Investment Funds on June 3, 2026, consolidating all AIF-related circulars, clarifications, and regulatory changes issued since the AIF Regulations of 2012 into a single reference document. The circular supersedes the May 2024 Master Circular and introduces enhanced requirements around valuation methodology (aligned with ICAI guidelines), co-investment disclosures, cross-holdings between AIFs and their fund managers, winding-up timelines, and institutional-quality reporting standards. It applies to all Category I, II, and III AIFs registered with SEBI, covering over 1,400 registered funds managing more than &#8377;11 lakh crore in committed capital.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>AIF &mdash; Alternative Investment Fund &mdash; is a pooled investment vehicle for sophisticated investors. Unlike a mutual fund (which anyone can invest in from &#8377;500 via a SIP), an AIF requires a minimum investment of &#8377;1 crore per investor (&#8377;25 lakh for employees of the fund manager). AIFs pool this capital and invest in assets outside the publicly listed space: early-stage startups (through Category I Venture Capital funds), mid-market companies (Category II Private Equity funds), real estate, distressed debt, and hedge-fund strategies (Category III). India has registered over 1,400 AIFs with SEBI managing over &#8377;11 lakh crore in committed capital &mdash; a number that has grown dramatically as India&rsquo;s wealthy investor class expanded. SEBI &mdash; Securities and Exchange Board of India &mdash; supervises AIFs just as it supervises listed companies, mutual funds, and stock brokers.</p>
+            <p>A Master Circular consolidates years of individual circulars into one reference document &mdash; imagine taking every SEBI instruction issued to AIFs and compiling them into a single rulebook. This simplifies compliance for fund managers who previously had to maintain a library of individual circulars. The substantive additions in the 2026 Master Circular: valuation methodology is now aligned with ICAI (Institute of Chartered Accountants of India) standards, meaning fund managers must value unlisted investments using specific auditable methods (not subjective book values), improving accuracy of NAV (Net Asset Value, the per-unit price of the AIF). Co-investment disclosures: when a fund manager allows certain investors to invest alongside the AIF in specific deals (a common practice to reward large LPs), this must now be fully disclosed and approved by the AIF&rsquo;s investment committee, preventing conflicts of interest. Winding-up timelines: AIFs that cannot liquidate must apply for SEBI extension within specified periods, preventing indefinite &ldquo;zombie funds&rdquo; that hold illiquid assets without clarity for investors. For an ordinary person in India: unless you are a high-net-worth individual investing in a startup fund or PE fund, you are probably not directly investing in an AIF. But you are indirectly affected &mdash; AIFs fund the startups, real estate projects, and healthcare companies that shape the economy. Better governance means more reliable capital allocation.</p>
+          </div></div>
+        </div>
+        <div class="stat-strip">
+          <div class="stat"><div class="n">1,400+</div><div class="l">AIFs registered with SEBI</div></div>
+          <div class="stat"><div class="n">&#8377;11L cr+</div><div class="l">AIF committed capital under management</div></div>
+          <div class="stat"><div class="n">June 3, 2026</div><div class="l">Master Circular effective date</div></div>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="src">RBI circular / Banking Finance India &middot; Mumbai</div>
+        <h3>RBI replaces FFMC licence with &ldquo;forex correspondent&rdquo; model &mdash; banks to appoint agents for retail currency exchange</h3>
+        <p class="compact">The Reserve Bank of India announced it will stop issuing new Full Fledged Money Changer licences and replace the framework with a &ldquo;forex correspondent&rdquo; model, under which authorised dealer banks appoint agents who can buy and sell foreign currency notes, handle travellers&rsquo; cheques, and support remittances. The model is patterned on the successful Business Correspondent framework that extended banking services to rural India, centralising compliance responsibility at the bank level and eliminating the proliferation of standalone regulated entities prone to informal activity.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>An FFMC &mdash; Full Fledged Money Changer &mdash; is any entity with an RBI licence to exchange foreign currency for rupees or vice versa. Think of the stalls at airports, hotel lobbies, or travel agencies that convert your dollars or euros to rupees. FEMA &mdash; Foreign Exchange Management Act &mdash; governs all cross-border currency transactions in India; the RBI regulates FFMCs under FEMA. India had thousands of licensed FFMCs; some were large, professional foreign exchange shops; many were small, loosely supervised, and occasionally used for informal currency or hawala (unofficial money transfer across borders) operations. Maintaining and auditing this population of standalone licensed entities was a supervisory burden. The new model: forex correspondents are not separately licensed; they are agents appointed by authorised dealer banks (SBI, HDFC Bank, Axis Bank, and others, which hold the main forex dealer licences). The bank is responsible for the agent&rsquo;s compliance, just as in the Business Correspondent model &mdash; where a village kirana store owner acts as a bank agent (doing balance enquiries, deposits, withdrawals) without being a licensed bank. The BC model significantly expanded financial access in rural India. The forex correspondent model is expected to expand professional foreign exchange services similarly, with better auditability. For an ordinary Indian: if you travel abroad, you will increasingly exchange currency through a bank-appointed agent rather than a standalone exchange shop. Rates and documentation remain similar, but the systemic risk of dealing with an informal operator decreases.</p>
+          </div></div>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="src">RBI circular / Legal 500 &middot; Mumbai</div>
+        <h3>RBI creates &ldquo;Unregistered Type I NBFC&rdquo; category to exempt small lenders that don&rsquo;t use public funds</h3>
+        <p class="compact">The Reserve Bank of India introduced a new regulatory category &mdash; &ldquo;Unregistered Type I NBFCs&rdquo; &mdash; for small lending entities that do not use public funds, have no customer-facing deposit interface, and hold assets below a specified threshold. These entities are exempted from the requirement to register with the RBI as formal NBFCs, reducing compliance burden for small local lenders that were technically required to be registered but effectively unregulated in practice. The framework was issued alongside cancellation of 135 dormant NBFC registrations in a broader regulatory hygiene exercise.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>An NBFC &mdash; Non-Banking Financial Company &mdash; is any company that lends, invests, or handles money but is not a bank. The RBI requires most NBFCs to register and comply with capital adequacy, reporting, and conduct requirements. India has thousands of small local lending companies &mdash; a village cooperative lending to farmers, a family-owned chit fund company, a small equipment financer &mdash; that technically fell under the NBFC definition and required registration but in practice never registered, creating a large grey population of technically illegal entities. The new &ldquo;Unregistered Type I NBFC&rdquo; category carves out these small, genuinely local, low-risk entities from mandatory registration, as long as they meet three criteria: no public funds (they lend their own or partner capital, not deposits from the public), no customer-facing deposit interface (they don&rsquo;t collect savings from ordinary people), and assets below a threshold. The risk logic: if an entity has no public deposits, its failure cannot harm ordinary savers. For an ordinary person in India, the practical implication is limited unless you operate in the informal lending space. The broader policy signal is appropriate: systemically important financial activity must be formally regulated; small, contained, non-deposit-taking activity deserves a lighter touch. Existing unregistered entities that qualify can apply for recognition through PRAVAAH (the RBI&rsquo;s online regulatory application portal) by December 31, 2026.</p>
+          </div></div>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="src">SEBI / The TaxCorp &middot; New Delhi</div>
+        <h3>SEBI Master Circular for Mutual Funds (March 2026): one document for the &#8377;65 lakh crore industry</h3>
+        <p class="compact">SEBI&rsquo;s March 2026 Master Circular for Mutual Funds, effective April 1, 2026, consolidated the entire regulatory framework governing India&rsquo;s mutual fund industry &mdash; managing over &#8377;65 lakh crore in assets across 8+ crore folios &mdash; into a single reference document. The circular updated expense ratio caps, risk-o-meter methodologies, swing pricing provisions, and disclosure standards, and is the primary compliance reference for all Asset Management Companies operating in India.</p>
+        <div class="zero-row">
+          <button class="zero-btn" onclick="toggleZero(this)">0%</button>
+          <div class="zero-wrap"><div class="zero"><span class="zlabel">Zero-Context Explainer</span>
+            <p>A mutual fund is a pool of money contributed by many investors, managed by a professional fund manager who invests it in stocks, bonds, or other assets according to the fund&rsquo;s stated objective. In India, mutual funds are regulated by SEBI and operated by AMCs &mdash; Asset Management Companies &mdash; like SBI Mutual Fund, HDFC AMC, Mirae Asset, Axis MF, and others. Over &#8377;65 lakh crore is managed by AMCs for over 8 crore investor folios &mdash; a folio is an account a single investor holds in a single fund; one person can hold multiple folios across different funds. The SEBI Master Circular codifies the rules AMCs must follow: expense ratios (the annual fee charged as a percentage of assets, capped by SEBI to protect investors from excessive fees &mdash; for a large equity fund, capped at approximately 1.05%), the risk-o-meter (the colour-coded risk label on each fund from Low to Very High Risk, updated monthly), swing pricing (a mechanism to adjust NAV when large redemptions occur to protect remaining investors from bearing exit costs), and disclosure standards (what AMCs must report to SEBI and investors and when). For an ordinary investor in India who runs a SIP or holds a mutual fund: this document governs how your fund is managed, how much it can charge you, and how it must communicate risk. Consolidating all rules into one document makes it easier for fund managers to comply and easier for sophisticated investors to know their rights.</p>
+          </div></div>
+        </div>
+        <div class="stat-strip">
+          <div class="stat"><div class="n">&#8377;65L cr+</div><div class="l">Total MF AUM covered by SEBI framework</div></div>
+          <div class="stat"><div class="n">8 cr+</div><div class="l">Investor folios in Indian mutual funds</div></div>
+          <div class="stat"><div class="n">Apr 1, 2026</div><div class="l">Master Circular effective date</div></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  </main>
+  <footer>
+    <span>The Daily Kashout &mdash; Edition No. 4 &mdash; Monday, June 15, 2026</span>
+    <span>Morning Edition &middot; Bengaluru</span>
+  </footer>
+</div>
+
+<script>
+var QUOTES=[
+ ["Make your money work for you, so you don't have to work for money.","Proverb"],
+ ["An investment in knowledge pays the best interest.","Benjamin Franklin"],
+ ["Price is what you pay. Value is what you get.","Warren Buffett"],
+ ["Be fearful when others are greedy, and greedy when others are fearful.","Warren Buffett"],
+ ["The stock market is a device for transferring money from the impatient to the patient.","Warren Buffett"],
+ ["The big money is not in the buying and selling, but in the waiting.","Charlie Munger"],
+ ["Spend each day trying to be a little wiser than you were when you woke up.","Charlie Munger"],
+ ["Do not save what is left after spending; spend what is left after saving.","Warren Buffett"],
+ ["Risk comes from not knowing what you're doing.","Warren Buffett"],
+ ["The four most dangerous words in investing are: 'this time it's different.'","John Templeton"],
+ ["Bull markets are born on pessimism, grow on skepticism, mature on optimism, and die on euphoria.","John Templeton"],
+ ["In investing, what is comfortable is rarely profitable.","Robert Arnott"],
+ ["Know what you own, and know why you own it.","Peter Lynch"],
+ ["Time in the market beats timing the market.","Market proverb"],
+ ["The individual investor should act consistently as an investor and not as a speculator.","Benjamin Graham"],
+ ["The intelligent investor is a realist who sells to optimists and buys from pessimists.","Benjamin Graham"],
+ ["Markets can remain irrational longer than you can remain solvent.","John Maynard Keynes"],
+ ["Don't look for the needle in the haystack. Just buy the haystack.","John Bogle"],
+ ["Compound interest is the eighth wonder of the world.","attributed to Einstein"],
+ ["Someone's sitting in the shade today because someone planted a tree a long time ago.","Warren Buffett"],
+ ["The best time to plant a tree was 20 years ago. The second best time is now.","Proverb"],
+ ["Money is a terrible master but an excellent servant.","P.T. Barnum"],
+ ["Beware of little expenses; a small leak will sink a great ship.","Benjamin Franklin"],
+ ["A budget is telling your money where to go instead of wondering where it went.","Dave Ramsey"],
+ ["He who lives by the crystal ball will eat shattered glass.","Ray Dalio"],
+ ["It's not how much money you make, but how much money you keep.","Robert Kiyosaki"],
+ ["Wide diversification is only required when investors do not understand what they are doing.","Warren Buffett"],
+ ["Fortune favours the prepared mind.","Louis Pasteur"],
+ ["Never test the depth of a river with both feet.","Proverb"],
+ ["The goal isn't more money. The goal is living life on your terms.","Chris Brogan"]
+];
+
+(function(){
+  var now=new Date(), start=new Date(now.getFullYear(),0,0);
+  var day=Math.floor((now-start)/86400000);
+  var q=QUOTES[day%QUOTES.length];
+  document.getElementById('quoteText').textContent='"'+q[0]+'"';
+  document.getElementById('quoteWho').textContent='— '+q[1];
+})();
+
+function tickClock(){
+  try{
+    document.getElementById('istClock').textContent=new Date().toLocaleTimeString('en-IN',{timeZone:'Asia/Kolkata',hour12:false});
+  }catch(e){ document.getElementById('istClock').textContent=new Date().toLocaleTimeString(); }
+}
+tickClock(); setInterval(tickClock,1000);
+
+function switchSection(id){
+  document.querySelectorAll('section.paper-section').forEach(s=>s.classList.toggle('visible',s.id==='sec-'+id));
+  document.querySelectorAll('.tab[data-section]').forEach(t=>t.classList.toggle('active',t.dataset.section===id));
+}
+document.querySelectorAll('.tab[data-section]').forEach(t=>t.addEventListener('click',()=>switchSection(t.dataset.section)));
+
+function toggleZero(btn){
+  var wrap=btn.closest('.zero-row').querySelector('.zero-wrap');
+  var on=wrap.classList.toggle('open');
+  btn.classList.toggle('on',on);
+  btn.textContent=on?'0% · close':'0%';
+}
+</script>
+</body>
+</html>
